@@ -1,8 +1,12 @@
 import { useDispatch } from 'react-redux'
 import style from './ToDoList.module.css'
-import {deleteToDoAC} from './../Redux/reducers'
+import {deleteToDoAC} from '../Redux/reducers'
 
-export const ButtonToDoDelete = props => {
+interface Prop {
+  id: number
+}
+
+export const ButtonToDoDelete: React.FC<Prop> = props => {
   
   const dispatch = useDispatch()
 

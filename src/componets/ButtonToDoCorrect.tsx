@@ -1,8 +1,17 @@
 import { useDispatch } from 'react-redux'
 import style from './ToDoList.module.css'
-import {updateInputAC} from './../Redux/reducers'
+import {updateInputAC} from '../Redux/reducers'
+import React from 'react'
 
-export const ButtonToDoCorrect = props => {
+interface Prop {
+  id: number,
+  newToDoText: string,
+  isEditing: boolean,
+  useIsEditing(isEditing: boolean): void
+}
+
+export const ButtonToDoCorrect: React.FC<Prop> = props => {
+
 
   const dispatch = useDispatch()
 

@@ -1,18 +1,17 @@
-const UPDATA_ADD_TODO = 'UPDATA_ADD_TODO'
-const ADD_TODO = 'ADD_TODO'
-const UPDATE_INPUT = 'UPDATE_INPUT'
-const DELETE_TODO = 'DELETE_TODO'
+import {todoList} from './../types/types'
+import {todoListAction} from './../types/types'
+import {TodoActionTypes} from './../types/types'
 
-const initialState = {
+const initialState: todoList  = {
   toDo: [],
   newToDoText: '',
 }
 
-export default function storeReducer(state = initialState, action) {
+const storeReducer = (state = initialState, action: todoListAction): todoList => {
   switch (action.type) {
-    case UPDATA_ADD_TODO:
-      return { ...state, newToDoText: action.text }
-    case ADD_TODO:
+    case TodoActionTypes.UPDATA_ADD_TODO:
+      return { ...state, newToDoText: action.payload }
+    case TodoActionTypes.ADD_TODO:
       return {
         ...state,
         toDo: [
@@ -21,7 +20,7 @@ export default function storeReducer(state = initialState, action) {
         ],
         newToDoText: '',
       }
-    case UPDATE_INPUT:
+    case TodoActionTypes.UPDATE_INPUT:
       return {
         ...state,
         toDo: state.toDo.map(item => {
@@ -35,7 +34,7 @@ export default function storeReducer(state = initialState, action) {
           return item
         }),
       }
-    case DELETE_TODO:
+    case TodoActionTypes.DELETE_TODO:
       return {
         ...state,
         toDo: state.toDo.filter(item => item.id !== action.payload),
@@ -45,29 +44,31 @@ export default function storeReducer(state = initialState, action) {
   }
 }
 
-export const updateToDoAC = value => {
+export default storeReducer
+
+export const updateToDoAC = (value: string) => {
   return {
-    type: UPDATA_ADD_TODO,
-    text: value,
+    type: TodoActionTypes.UPDATA_ADD_TODO,
+    payload: value,
   }
 }
 
 export const addToDoAC = () => {
   return {
-    type: ADD_TODO,
+    type: TodoActionTypes.ADD_TODO,
   }
 }
 
-export const updateInputAC = value => {
+export const updateInputAC = (value: {todoId: number, text: string}) => {
   return {
-    type: UPDATE_INPUT,
+    type: TodoActionTypes.UPDATE_INPUT,
     payload: value,
   }
 }
 
-export const deleteToDoAC = value => {
+export const deleteToDoAC = (value: number) => {
   return {
-    type: DELETE_TODO,
+    type: TodoActionTypes.DELETE_TODO,
     payload: value,
   }
 }

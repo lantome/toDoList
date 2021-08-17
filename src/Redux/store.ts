@@ -7,5 +7,7 @@ const rootReducers = combineReducers({
     todoList: storeReducer
 })
 
+export type RootState = ReturnType<typeof rootReducers>
+
 export const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)))
 

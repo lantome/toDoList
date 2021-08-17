@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import style from './ToDoList.module.css'
 import {addToDoAC} from '../Redux/reducers'
+import {UseTypedSelector} from './hooks/UseTypedSelector'
 
 export const ButtonAddToDo = () => {
   
   const dispatch = useDispatch()
 
-  const newText = useSelector(state => state.todoList.newToDoText)
+  const newText = UseTypedSelector(state => state.todoList.newToDoText)
 
   const addToDo = () => {
     if (newText === '') {

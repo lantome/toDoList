@@ -1,18 +1,24 @@
 import { useState } from 'react' 
 import style from './ToDoList.module.css'
 import { useDispatch } from 'react-redux'
-import {updateInputAC} from './../Redux/reducers'
+import {updateInputAC} from '../Redux/reducers'
 
 
 
+interface Prop {
+  id: number,
+  newToDoText: string,
+  isEditing: boolean,
+  useIsEditing(isEditing: boolean): void
+}
 
-export const SpanOrInputToDo = props => {
+export const SpanOrInputToDo: React.FC<Prop> = props => {
   
   const dispatch = useDispatch()
 
-  const [flag, useFlag] = useState(false)
+  const [flag, useFlag] = useState<boolean>(false)
 
-  const LineThrough = e => {
+  const LineThrough = (e: React.ChangeEvent<HTMLInputElement>) => {
     const flag = e.target.checked
     useFlag(flag)
   }
@@ -21,7 +27,7 @@ export const SpanOrInputToDo = props => {
     props.useIsEditing(true)
   }
 
-  const handlerInput = e => {
+  const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value
     dispatch(updateInputAC({ todoId: props.id, text: text }))
   }
